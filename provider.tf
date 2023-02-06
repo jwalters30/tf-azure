@@ -12,11 +12,11 @@ terraform {
     storage_account_name = "jwalterstfstorage202302"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
-#    use_oidc = true
+    #    use_oidc = true
   }
 }
 
 provider "azurerm" {
-#  use_oidc = true
+  #  use_oidc = true
   features {}
 }
