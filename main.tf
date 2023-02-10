@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "rg" {
+/* resource "azurerm_resource_group" "rg" {
   name     = "myTFResourceGroup"
   location = "westus2"
 }
@@ -63,4 +63,16 @@ module "enterprise_scale" {
   deploy_management_resources    = false
   configure_management_resources = data.terraform_remote_state.management.outputs.configuration
   subscription_id_management     = data.terraform_remote_state.management.outputs.subscription_id
+}
+
+*/
+variable "resource_group_name" {
+  type        = list(string)
+  default     = [ "rg-test-1", "rg-test-2", "rg_test_3"]
+}
+  
+resource "azurerm_resource_group" "test" {
+  count    = length(var.resource_group_name)
+  name     = element(concat(var.resource_group_name, [""]), count.index)
+  location = var.location
 }
