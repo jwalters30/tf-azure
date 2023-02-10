@@ -76,3 +76,19 @@ resource "azurerm_resource_group" "test" {
   name     = element(concat(var.resource_group_name, [""]), count.index)
   location = "eastus"
 }
+
+module "service-principal" {
+  source  = "kumarvna/service-principal/azuread"
+  version = "2.3.0"
+
+  service_principal_name     = "jw-simple"
+  password_rotation_in_years = 1
+
+  # Adding roles and scope to service principal
+  assignments = [
+    {
+      scope                = "/subscriptions/d00942f6-41ca-4ea1-8ef4-aa271ffaa70f"
+      role_definition_name = "Contributor"
+    },
+  ]
+}
