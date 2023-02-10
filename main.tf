@@ -68,7 +68,7 @@ module "enterprise_scale" {
 */
 variable "resource_group_name" {
   type        = list(string)
-  default     = [ "rg-test-1", "rg-test-2", "rg_test_bogus"]
+  default     = [ "rg-test-1", "rg-test-2"]
 }
   
 resource "azurerm_resource_group" "test" {
