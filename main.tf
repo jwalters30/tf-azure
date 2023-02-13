@@ -99,3 +99,16 @@ module "service-principal" {
     },
   ]
 }
+
+data "azurerm_management_group" "example" {
+  name = "JIM-Hub"
+}
+
+data "azurerm_subscription" "example" {
+  subscription_id = "d00942f6-41ca-4ea1-8ef4-aa271ffaa70f"
+}
+
+resource "azurerm_management_group_subscription_association" "example" {
+  management_group_id = data.azurerm_management_group.example.id
+  subscription_id     = data.azurerm_subscription.example.id
+}
