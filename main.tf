@@ -67,10 +67,10 @@ module "enterprise_scale" {
 
 */
 variable "resource_group_name" {
-  type        = list(string)
-  default     = [ "rg-test-1", "rg-test-2"]
+  type    = list(string)
+  default = ["rg-test-1", "rg-test-2"]
 }
-  
+
 resource "azurerm_resource_group" "test" {
   count    = length(var.resource_group_name)
   name     = element(concat(var.resource_group_name, [""]), count.index)
@@ -81,7 +81,7 @@ module "service-principal" {
   source  = "kumarvna/service-principal/azuread"
   version = "2.3.0"
 
-  service_principal_name     = "jw-simple"
+  service_principal_name     = "jw-simple-001.jwalters20220923aoutlook.onmicrosoft.com"
   password_rotation_in_years = 1
 
   # Adding roles and scope to service principal
