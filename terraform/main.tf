@@ -45,8 +45,8 @@ module "enterprise_scale" {
   
   # En/disable creation of the core management group hierarchy
   # and additional custom_landing_zones
-  deploy_core_landing_zones = false
-  # custom_landing_zones      = local.custom_landing_zones
+  deploy_core_landing_zones = true
+  custom_landing_zones      = local.custom_landing_zones
   
   # Configuration settings for identity resources is
   # bundled with core as no resources are actually created
@@ -102,6 +102,7 @@ module "service-principal" {
   ]
 }
 
+/*
 data "azurerm_management_group" "example" {
   name = "JIM-Hub"
 }
@@ -114,3 +115,4 @@ resource "azurerm_management_group_subscription_association" "example" {
   management_group_id = data.azurerm_management_group.example.id
   subscription_id     = data.azurerm_subscription.example.id
 }
+*/
