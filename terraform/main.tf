@@ -27,11 +27,7 @@ module "enterprise_scale" {
       subscription_ids           = []
       archetype_config = {
         archetype_id   = "customer_online"
-        parameters     = {
-          Deny-Subnet-Without-Nsg = {
-            enforcementMode = "Allow"
-          }
-        }
+        parameters     = {}
         access_control = {}
       }
     }
@@ -56,7 +52,6 @@ module "enterprise_scale" {
   # bundled with core as no resources are actually created
   # for the identity subscription
   deploy_identity_resources    = true
-/*
   configure_identity_resources = {
     settings = {
       identity = {
@@ -67,7 +62,6 @@ module "enterprise_scale" {
       }
     }
   }
-*/
   # subscription_id_identity     = var.subscription_id_identity
   
   # The following inputs ensure that managed parameters are
