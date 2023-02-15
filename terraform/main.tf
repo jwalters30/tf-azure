@@ -51,8 +51,17 @@ module "enterprise_scale" {
   # Configuration settings for identity resources is
   # bundled with core as no resources are actually created
   # for the identity subscription
-  deploy_identity_resources    = false
-  # configure_identity_resources = local.configure_identity_resources
+  deploy_identity_resources    = true
+  configure_identity_resources = {
+    settings = {
+      identity = {
+        config = {
+          # Disable this policy as can conflict with Terraform
+          enable_deny_subnet_without_nsg = false
+        }
+      }
+    }
+  }
   # subscription_id_identity     = var.subscription_id_identity
   
   # The following inputs ensure that managed parameters are
