@@ -19,7 +19,7 @@ module "enterprise_scale" {
   root_id        = var.root_id
   root_name      = var.root_name
   library_path   = "${path.module}/lib"
-/*
+
   custom_landing_zones = {
     "${var.root_id}-Hub" = {
       display_name               = "${upper(var.root_id)} Hub"
@@ -52,16 +52,16 @@ module "enterprise_scale" {
       }
     }
   }
-*/  
+
   # En/disable creation of the core management group hierarchy
   # and additional custom_landing_zones
-  deploy_core_landing_zones = false
+  deploy_core_landing_zones = true
   # custom_landing_zones      = local.custom_landing_zones
   
   # Configuration settings for identity resources is
   # bundled with core as no resources are actually created
   # for the identity subscription
-  deploy_identity_resources    = false
+  deploy_identity_resources    = true
 /*  
   configure_identity_resources = {
     settings = {
