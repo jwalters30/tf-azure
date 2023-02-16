@@ -111,14 +111,14 @@ resource "azurerm_virtual_network" "test" {
   name = "JimVnet"
   resource_group_name = "rg-test-1"
   location = "eastus"
-  address_space = "10.0.0.0/0"
+  address_space = [ "10.0.0.0/16" ]
 }
 
 resource "azurerm_subnet" "snet" {
   name                 = "subnet1"
   resource_group_name  = "rg-test-1"
   virtual_network_name = azurerm_virtual_network.test.name
-  address_prefixes     = "10.0.0.0/24"
+  address_prefixes     = [ "10.0.0.0/24" ]
 }
 
 module "service-principal" {
