@@ -24,7 +24,7 @@ module "enterprise_scale" {
     "${var.root_id}-Hub" = {
       display_name               = "${upper(var.root_id)} Hub"
       parent_management_group_id = "${var.root_id}-landing-zones"
-      subscription_ids           = []
+      subscription_ids           = ["d00942f6-41ca-4ea1-8ef4-aa271ffaa70f"]
       archetype_config = {
         archetype_id   = "customer_online"
         parameters     = {}
