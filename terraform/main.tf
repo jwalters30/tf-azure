@@ -34,7 +34,7 @@ module "enterprise_scale" {
           Deny-RSG-Locations = {
             listOfAllowedLocations = ["eastus","eastus2"]
           }
-          Deny-Subnet-Without-Nsg = {
+          Deny-Subnet-Without-Nsg-garbage = {
             effect = "Audit"
           }
         }
