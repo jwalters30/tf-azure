@@ -35,7 +35,7 @@ module "enterprise_scale" {
             listOfAllowedLocations = ["eastus","eastus2"]
           }
           Deny-Subnet-Without-Nsg = {
-            effect = ["Audit",]
+            effect = "Audit"
           }
         }
         access_control = {}
