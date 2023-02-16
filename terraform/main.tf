@@ -27,7 +27,17 @@ module "enterprise_scale" {
       subscription_ids           = ["d00942f6-41ca-4ea1-8ef4-aa271ffaa70f"]
       archetype_config = {
         archetype_id   = "customer_online"
-        parameters     = {}
+        parameters     = {
+          Deny-Resource-Locations = {
+            listOfAllowedLocations = ["eastus","eastus2"]
+          }
+          Deny-RSG-Locations = {
+            listOfAllowedLocations = ["eastus",]
+          }
+          Deny-Subnet-Without-Nsg = {
+            effect = "Audit"
+          }
+        }
         access_control = {}
       }
     }
@@ -52,6 +62,7 @@ module "enterprise_scale" {
   # bundled with core as no resources are actually created
   # for the identity subscription
   deploy_identity_resources    = true
+/*  
   configure_identity_resources = {
     settings = {
       identity = {
@@ -62,6 +73,7 @@ module "enterprise_scale" {
       }
     }
   }
+*/
   # subscription_id_identity     = var.subscription_id_identity
   
   # The following inputs ensure that managed parameters are
@@ -110,18 +122,3 @@ module "service-principal" {
     },
   ]
 }
-
-/*
-data "azurerm_management_group" "example" {
-  name = "JIM-Hub"
-}
-
-data "azurerm_subscription" "example" {
-  subscription_id = "d00942f6-41ca-4ea1-8ef4-aa271ffaa70f"
-}
-
-resource "azurerm_management_group_subscription_association" "example" {
-  management_group_id = data.azurerm_management_group.example.id
-  subscription_id     = data.azurerm_subscription.example.id
-}
-*/
