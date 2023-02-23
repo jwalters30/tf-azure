@@ -137,6 +137,7 @@ module "service-principal" {
   ]
 }
 
+/*
 resource "azurerm_public_ip" "public_ip" {
   name                = "vm_public_ip"
   resource_group_name = azurerm_resource_group.test[0].name
@@ -206,4 +207,4 @@ resource "azurerm_windows_virtual_machine" "example" {
     version   = "latest"
   }
 }
-
+*/
