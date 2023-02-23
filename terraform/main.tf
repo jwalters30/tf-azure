@@ -184,7 +184,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
   resource_group_name = azurerm_resource_group.test[0].name
   location            = azurerm_resource_group.test[0].location
-  size                = "D2as_v5"
+  size                = "Standard_D2as_v5"
   admin_username      = "foolishuser"
   admin_password      = "P@$$w0rdAwful2023!"
   network_interface_ids = [
