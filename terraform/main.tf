@@ -170,7 +170,7 @@ resource "azurerm_network_security_group" "nsg" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
-    source_address_prefix      = "98.97.0.25/32"
+    source_address_prefix      = "98.97.6.187/32"
     destination_address_prefix = "*"
   }
 }
