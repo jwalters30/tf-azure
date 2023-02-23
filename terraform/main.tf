@@ -139,8 +139,8 @@ module "service-principal" {
 
 resource "azurerm_public_ip" "public_ip" {
   name                = "vm_public_ip"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.test[0].name
+  location            = azurerm_resource_group.test[0].location
   allocation_method   = "Dynamic"
 }
 
@@ -155,6 +155,29 @@ resource "azurerm_network_interface" "example" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.public_ip.id
   }
+}
+
+resource "azurerm_network_security_group" "nsg" {
+  name                = "rdp_nsg"
+  location            = azurerm_resource_group.test[0].location
+  resource_group_name = azurerm_resource_group.test[0].name
+
+  security_rule {
+    name                       = "allow_rdp_russ"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "98.97.0.25/32"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "association" {
+  network_interface_id      = azurerm_network_interface.example.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 resource "azurerm_windows_virtual_machine" "example" {
