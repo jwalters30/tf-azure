@@ -179,7 +179,7 @@ resource "azurerm_network_interface_security_group_association" "association" {
   network_interface_id      = azurerm_network_interface.example.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
-/*
+
 resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
   resource_group_name = azurerm_resource_group.test[0].name
@@ -206,4 +206,4 @@ resource "azurerm_windows_virtual_machine" "example" {
     version   = "latest"
   }
 }
-*/
+
