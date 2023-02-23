@@ -190,7 +190,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   network_interface_ids = [
     azurerm_network_interface.example.id,
   ]
-  identity = {
+  identity {
     type = "SystemAssigned"
   }
 
