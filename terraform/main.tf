@@ -184,12 +184,15 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
   resource_group_name = azurerm_resource_group.test[0].name
   location            = azurerm_resource_group.test[0].location
-  size                = "Standard_F2"
+  size                = "D2as_v5"
   admin_username      = "foolishuser"
   admin_password      = "P@$$w0rdAwful2023!"
   network_interface_ids = [
     azurerm_network_interface.example.id,
   ]
+  identity = {
+    type = "SystemAssigned"
+  }
 
   os_disk {
     caching              = "ReadWrite"
@@ -199,7 +202,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
+    sku       = "2022-datacenter-g2"
     version   = "latest"
   }
 }
