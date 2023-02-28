@@ -26,13 +26,13 @@ module "enterprise_scale" {
       parent_management_group_id = "${var.root_id}-landing-zones"
       subscription_ids           = ["d00942f6-41ca-4ea1-8ef4-aa271ffaa70f"]
       archetype_config = {
-        archetype_id   = "customer_online"
-        parameters     = {
+        archetype_id = "customer_online"
+        parameters = {
           Deny-Resource-Locations = {
-            listOfAllowedLocations = ["eastus","eastus2"]
+            listOfAllowedLocations = ["eastus", "eastus2"]
           }
           Deny-RSG-Locations = {
-            listOfAllowedLocations = ["eastus","eastus2"]
+            listOfAllowedLocations = ["eastus", "eastus2"]
           }
           Deny-Subnet-Without-Nsg-garbage = {
             effect = "Audit"
@@ -57,12 +57,12 @@ module "enterprise_scale" {
   # and additional custom_landing_zones
   deploy_core_landing_zones = true
   # custom_landing_zones      = local.custom_landing_zones
-  
+
   # Configuration settings for identity resources is
   # bundled with core as no resources are actually created
   # for the identity subscription
-  deploy_identity_resources    = true
-/*  
+  deploy_identity_resources = true
+  /*  
   configure_identity_resources = {
     settings = {
       identity = {
@@ -75,22 +75,22 @@ module "enterprise_scale" {
   }
 */
   # subscription_id_identity     = var.subscription_id_identity
-  
+
   # The following inputs ensure that managed parameters are
   # configured correctly for policies relating to connectivity
   # resources created by the connectivity module instance and
   # to map the subscription to the correct management group,
   # but no resources are created by this module instance
-  deploy_connectivity_resources    = false
+  deploy_connectivity_resources = false
   # configure_connectivity_resources = data.terraform_remote_state.connectivity.outputs.configuration
   # subscription_id_connectivity     = data.terraform_remote_state.connectivity.outputs.subscription_id
-  
+
   # The following inputs ensure that managed parameters are
   # configured correctly for policies relating to management
   # resources created by the management module instance and
   # to map the subscription to the correct management group,
   # but no resources are created by this module instance
-  deploy_management_resources    = false
+  deploy_management_resources = false
   #configure_management_resources = data.terraform_remote_state.management.outputs.configuration
   #subscription_id_management     = data.terraform_remote_state.management.outputs.subscription_id
 
@@ -108,17 +108,17 @@ resource "azurerm_resource_group" "test" {
 }
 
 resource "azurerm_virtual_network" "test" {
-  name = "JimVnet"
+  name                = "JimVnet"
   resource_group_name = "rg-test-1"
-  location = "eastus"
-  address_space = [ "10.0.0.0/16" ]
+  location            = "eastus"
+  address_space       = ["10.0.0.0/16"]
 }
 
 resource "azurerm_subnet" "snet" {
   name                 = "subnet1"
   resource_group_name  = "rg-test-1"
   virtual_network_name = azurerm_virtual_network.test.name
-  address_prefixes     = [ "10.0.1.0/24" ]
+  address_prefixes     = ["10.0.0.0/24"]
 }
 
 module "service-principal" {
