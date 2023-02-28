@@ -3,7 +3,7 @@
 
 name: "Terraform Deploy"
 on:
-  pull-request:
+  pull_request:
 permissions:
   pull-requests: write
   contents: read # default
