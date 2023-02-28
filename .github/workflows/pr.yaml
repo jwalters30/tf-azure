@@ -3,9 +3,7 @@
 
 name: "Terraform Deploy"
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 permissions:
   pull-requests: write
   contents: read # default
@@ -85,19 +83,3 @@ jobs:
             body: output
           })
           
-    - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve
-      
-    # Disable Subnet NSG Policy
-    - name: Login via Az module
-      uses: Azure/login@v1
-      with:
-        creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
-        enable-AzPSSession: true
-    - name: Run Azure PowerShell script
-      uses: azure/powershell@v1
-      with:
-        inlineScript: |
-          Set-AzPolicyAssignment -Id "/providers/Microsoft.Management/managementGroups/JIM-landing-zones/providers/Microsoft.Authorization/policyAssignments/Deny-Subnet-Without-Nsg" -EnforcementMode DoNotEnforce
-        azPSVersion: "latest"
